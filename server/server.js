@@ -15,6 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client')));
 
 
-server.listen(3000, () => {
+app.listen(3000, () => {
   console.log('server running');
 });
