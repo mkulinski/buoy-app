@@ -42,9 +42,11 @@ function callback(response) {
   });
 
   response.on('end', function() {
+    // Converting XML to JS
     const x2js = new X2JS();
     const document = x2js.xml2js(str);
     doc = document.rss.channel.item;
+    // Removing all
     doc.forEach((item) => {
       item.description.replace(/\/|br|<|>|\n|:/ig, '');
     })
