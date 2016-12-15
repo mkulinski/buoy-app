@@ -46,7 +46,7 @@ function callback(response) {
     const x2js = new X2JS();
     const document = x2js.xml2js(str);
     doc = document.rss.channel.item;
-    // Removing all
+    // Removing all html tags from the strings in the description
     doc.forEach((item) => {
       item.description.replace(/\/|br|<|>|\n|:/ig, '');
     })
@@ -54,7 +54,9 @@ function callback(response) {
     test = test.split('strong').map((item) => {
       return item.trim();
     });
+    // gets an array with just the date property
     const date = test.splice(0, 3).filter((item) => item !== '');
+    // creates an object with key/value pairs of everything in the description
     const outObj = {};
     for (let i = 0; i < test.length; i++) {
       if (!i % 2) {
