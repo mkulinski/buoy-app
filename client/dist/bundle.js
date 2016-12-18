@@ -26414,6 +26414,10 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _Buoy = __webpack_require__(260);
+
+	var _Buoy2 = _interopRequireDefault(_Buoy);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26431,6 +26435,7 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
 	    _this.state = { buoys: [] };
+	    _this.descParse = _this.descParse.bind(_this);
 	    return _this;
 	  }
 
@@ -26440,12 +26445,26 @@
 	      var _this2 = this;
 
 	      _axios2.default.get('/allBuoys').then(function (data) {
-	        console.log(data.data);
 	        var arr = data.data.map(function (item) {
-	          return [item.title, item.description];
+	          var desc = _this2.descParse(item.description);
+	          return _react2.default.createElement(_Buoy2.default, { title: item.title, date: item.date, desc: desc });
 	        });
 	        _this2.setState({ buoys: arr });
 	      });
+	    }
+	  }, {
+	    key: 'descParse',
+	    value: function descParse(desc) {
+	      var outDesc = Object.keys(desc).map(function (item) {
+	        return _react2.default.createElement(
+	          'p',
+	          null,
+	          item,
+	          ': ',
+	          desc[item]
+	        );
+	      });
+	      return outDesc;
 	    }
 	  }, {
 	    key: 'render',
@@ -26453,6 +26472,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'App'
+	        ),
 	        this.state.buoys
 	      );
 	    }
@@ -27965,6 +27989,57 @@
 	  };
 	};
 
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Buoy = function Buoy(props) {
+	  console.log(props.desc);
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h4',
+	      null,
+	      props.title
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      props.date
+	    ),
+	    props.desc
+	  );
+	};
+
+	var _default = Buoy;
+	exports.default = _default;
+	;
+
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Buoy, 'Buoy', '/Users/mkulinski/Documents/Projects/buoy/client/components/Buoy.js');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/Buoy.js');
+	}();
+
+	;
 
 /***/ }
 /******/ ]);

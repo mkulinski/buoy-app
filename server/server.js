@@ -17,71 +17,55 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../client')));
 
-// $.get(URL, function (data) {
-//     $(data).find("item").each(function () { // or "item" or whatever suits your feed
-//         var el = $(this);
+// const options = {
+//   host: 'www.ndbc.noaa.gov',
+//   path: '/rss/ndbc_obs_search.php?lat=40N&lon=73W&radius=100',
+//   method: 'GET',
+// };
 //
-//         console.log("------------------------");
-//         console.log("title      : " + el.find("title").text());
-//         console.log("description: " + el.find("description").text());
+// let doc;
+//
+// function callback(response) {
+//   let str = '';
+//   response.on('data', function (chunk) {
+//     str += chunk;
+//   });
+//
+//   response.on('end', function() {
+//     // Converting XML to JS
+//     const x2js = new X2JS();
+//     const document = x2js.xml2js(str);
+//     doc = document.rss.channel.item;
+//     // Removing all html tags from the strings in the description
+//     doc.forEach((item) => {
+//       const { description, title } = item;
+//       // removes uneeded space and characters
+//       let trimDesc = description.replace(/\/|br|<|>|\n|:/ig, '');
+//       trimDesc = trimDesc.split('strong').map(strng => strng.trim());
+//       // grabs date
+//       const currDate = trimDesc.splice(0, 3).filter(date => date !== '')[0];
+//       // create an object for description key/value pairs
+//       const descObj = {};
+//       for (let i = 0; i < trimDesc.length; i++) {
+//         if (i % 2 === 0) {
+//           descObj[trimDesc[i]];
+//         } else {
+//           descObj[trimDesc[i - 1]] = trimDesc[i];
+//         }
+//       }
+//       // create an buoy object to store in database
+//       const buoy = Object.assign({ title, date: currDate, description: descObj });
+//       // stores buoy in database
+//       buoyController.addBuoy(buoy);
 //     });
-// });
+//   });
+// }
+//
+// const requesting = http.request(options, callback);
+// requesting.end();
 
-const options = {
-  host: 'www.ndbc.noaa.gov',
-  path: '/rss/ndbc_obs_search.php?lat=40N&lon=73W&radius=100',
-  method: 'GET',
-};
-
-let doc;
-
-function callback(response) {
-  let str = '';
-  response.on('data', function (chunk) {
-    str += chunk;
-  });
-
-  response.on('end', function() {
-    // Converting XML to JS
-    const x2js = new X2JS();
-    const document = x2js.xml2js(str);
-    doc = document.rss.channel.item;
-    // Removing all html tags from the strings in the description
-    doc.forEach((item) => {
-      item.description.replace(/\/|br|<|>|\n|:/ig, '');
-    })
-    let test = doc[0].description.replace(/\/|br|<|>|\n|:/ig, '');
-    test = test.split('strong').map((item) => {
-      return item.trim();
-    });
-    // gets an array with just the date property
-    const date = test.splice(0, 3).filter((item) => item !== '');
-    // creates an object with key/value pairs of everything in the description
-    const outObj = {};
-    for (let i = 0; i < test.length; i++) {
-      if (!i % 2) {
-        outObj[test[i]];
-      } else {
-        outObj[test[i - 1]] = test[i];
-      }
-    }
-    buoyController.addBuoy({ })
-    console.log(outObj);
-
-    // console.log(document.rss.channel.item);
-    // const title = document.rss.channel.item[0].title;
-    // console.log(title)
-    // const description = document.rss.channel.item[0].description;
-    // console.log(description);
-  });
-}
-
-const requesting = http.request(options, callback);
-requesting.end();
-
-app.get('/allBuoys', (req, res) => {
-  res.json(doc);
-});
+// get request to send all buoy data to frontend
+app.get('/allBuoys', buoyController.findAllBuoys);
 
 app.listen(3000, () => {
   console.log('server running');
