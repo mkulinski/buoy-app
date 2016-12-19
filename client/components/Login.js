@@ -10,9 +10,9 @@ export default class Login extends Component {
 
   onSubmit(evt) {
     evt.preventDefault();
-    // grab username and password from form
+    // grab username from form
     const username = this.refs.username.value;
-    // go to dashboard
+    // go to buoy-list
     if (username) browserHistory.push('/buoy-list');
     // reset form
     this.refs.username.value = '';
