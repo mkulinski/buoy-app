@@ -28046,7 +28046,7 @@
 	        null,
 	        _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: '/buoys-list' },
+	          { to: '/buoy-list' },
 	          'Buoys'
 	        )
 	      ),
