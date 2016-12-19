@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Buoy from './Buoy';
+import Nav from './Nav';
 
 export default class App extends Component {
   constructor() {
@@ -30,12 +30,13 @@ export default class App extends Component {
     return Object.keys(desc).map((item) => {
       return [item, desc[item]];
     });
+    //this.state.buoys
   }
 
   render() {
     return (
       <div>
-        <h1>App</h1>
+        <Nav />
         { this.state.buoys }
       </div>
     );
