@@ -6,7 +6,6 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
-    console.log(props);
   }
 
   onSubmit(evt) {
@@ -14,7 +13,7 @@ export default class Login extends Component {
     // grab username and password from form
     const username = this.refs.username.value;
     // go to dashboard
-    if (username) browserHistory.push('/buoys');
+    if (username) browserHistory.push('/buoy-list');
     // reset form
     this.refs.username.value = '';
   }

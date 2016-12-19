@@ -1,12 +1,12 @@
 import React from 'react';
 import Buoy from './Buoy';
 
-const Buoys = (props) => {
+const BuoyList = (props) => {
   return (
     <div>
-      { props.buoys }
+      { props.children.appState.buoys }
     </div>
   );
 };
 
-export default Buoys;
+export default BuoyList;

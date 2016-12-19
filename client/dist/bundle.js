@@ -65,12 +65,30 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
+	var _BuoyList = __webpack_require__(266);
+
+	var _BuoyList2 = _interopRequireDefault(_BuoyList);
+
+	var _Login = __webpack_require__(263);
+
+	var _Login2 = _interopRequireDefault(_Login);
+
+	var _Favorites = __webpack_require__(265);
+
+	var _Favorites2 = _interopRequireDefault(_Favorites);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default })
+	  _react2.default.createElement(
+	    _reactRouter.Route,
+	    { path: '/', component: _App2.default },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Login2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/buoy-list', component: _BuoyList2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/favorites', component: _Favorites2.default })
+	  )
 	), document.getElementById('app'));
 	;
 
@@ -26414,7 +26432,11 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _Buoy = __webpack_require__(260);
+	var _Nav = __webpack_require__(260);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _Buoy = __webpack_require__(261);
 
 	var _Buoy2 = _interopRequireDefault(_Buoy);
 
@@ -26462,6 +26484,7 @@
 	      });
 	      var newFavorites = this.state.favorites.concat(currBuoys);
 	      this.setState({ favorites: newFavorites });
+	      console.log('state updated', this.state.favorites);
 	    }
 	  }, {
 	    key: 'descParse',
@@ -26476,12 +26499,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'App'
-	        ),
-	        this.state.buoys
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.cloneElement(this.props.children, this.props, {
+	          appState: this.state,
+	          onFav: this.onFav
+	        })
 	      );
 	    }
 	  }]);
@@ -28010,6 +28032,59 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var Nav = function Nav() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Buoys'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        'Favorites'
+	      )
+	    )
+	  );
+	};
+
+	var _default = Nav;
+	exports.default = _default;
+	;
+
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Nav, 'Nav', '/Users/mkulinski/Documents/Projects/buoy/client/components/Nav.js');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/Nav.js');
+	}();
+
+	;
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var Buoy = function Buoy(props) {
 	  return _react2.default.createElement(
 	    'div',
@@ -28056,6 +28131,270 @@
 	  __REACT_HOT_LOADER__.register(Buoy, 'Buoy', '/Users/mkulinski/Documents/Projects/buoy/client/components/Buoy.js');
 
 	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/Buoy.js');
+	}();
+
+	;
+
+/***/ },
+/* 262 */,
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(179);
+
+	var _loginStyles = __webpack_require__(264);
+
+	var _loginStyles2 = _interopRequireDefault(_loginStyles);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Login = function (_Component) {
+	  _inherits(Login, _Component);
+
+	  function Login(props) {
+	    _classCallCheck(this, Login);
+
+	    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+	    _this.onSubmit = _this.onSubmit.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(Login, [{
+	    key: 'onSubmit',
+	    value: function onSubmit(evt) {
+	      evt.preventDefault();
+	      // grab username and password from form
+	      var username = this.refs.username.value;
+	      // go to dashboard
+	      if (username) _reactRouter.browserHistory.push('/buoy-list');
+	      // reset form
+	      this.refs.username.value = '';
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { style: _loginStyles2.default.topContainer },
+	        _react2.default.createElement(
+	          'div',
+	          { style: _loginStyles2.default.container },
+	          _react2.default.createElement(
+	            'h1',
+	            { style: _loginStyles2.default.heading },
+	            'Login'
+	          ),
+	          _react2.default.createElement(
+	            'form',
+	            { onSubmit: this.onSubmit, style: _loginStyles2.default.form },
+	            _react2.default.createElement(
+	              'label',
+	              { style: _loginStyles2.default.label },
+	              'Username'
+	            ),
+	            _react2.default.createElement('input', { type: 'text', ref: 'username', style: _loginStyles2.default.input }),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'submit', className: 'submit-button', style: _loginStyles2.default.buttonStyle },
+	              'Submit'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Login;
+	}(_react.Component);
+
+	var _default = Login;
+	exports.default = _default;
+	;
+
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Login, 'Login', '/Users/mkulinski/Documents/Projects/buoy/client/components/Login.js');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/Login.js');
+	}();
+
+	;
+
+/***/ },
+/* 264 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var style = {
+	  topContainer: {
+	    display: 'flex',
+	    justifyContent: 'center',
+	    fontFamily: 'Raleway'
+	  },
+	  container: {
+	    width: 500,
+	    display: 'flex',
+	    alignItems: 'center',
+	    justifyContent: 'center',
+	    flexDirection: 'column'
+	  },
+	  form: {
+	    display: 'flex',
+	    flexDirection: 'column'
+	  },
+	  heading: {
+	    marginBottom: 50,
+	    textAlign: 'center'
+	  },
+	  input: {
+	    width: '22rem',
+	    marginBottom: '1rem',
+	    fontSize: 14,
+	    lineHeight: 14,
+	    height: 48,
+	    paddingLeft: 17,
+	    paddingRight: 17,
+	    backgroundColor: '#fff',
+	    color: '#323233',
+	    borderRadius: 8,
+	    border: '1px solid #dddddd'
+	  },
+	  buttonStyle: {
+	    height: 48,
+	    marginTop: 5,
+	    borderRadius: 8,
+	    boxShadow: 'none',
+	    textShadow: 'none',
+	    color: '#fff',
+	    fontSize: 18,
+	    lineHeight: 1,
+	    fontWeight: 'bold',
+	    textAlign: 'center',
+	    background: '#10b48f',
+	    border: 'none',
+	    padding: '15 30'
+	  },
+	  label: {
+	    marginBottom: 5
+	  }
+	};
+
+	module.exports = style;
+	;
+
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(style, 'style', '/Users/mkulinski/Documents/Projects/buoy/client/styles/loginStyles.js');
+	}();
+
+	;
+
+/***/ },
+/* 265 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Favorites = function Favorites(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    props.children.appState.favorites
+	  );
+	};
+
+	var _default = Favorites;
+	exports.default = _default;
+	;
+
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Favorites, 'Favorites', '/Users/mkulinski/Documents/Projects/buoy/client/components/Favorites.js');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/Favorites.js');
+	}();
+
+	;
+
+/***/ },
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Buoy = __webpack_require__(261);
+
+	var _Buoy2 = _interopRequireDefault(_Buoy);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var BuoyList = function BuoyList(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    props.children.appState.buoys
+	  );
+	};
+
+	var _default = BuoyList;
+	exports.default = _default;
+	;
+
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(BuoyList, 'BuoyList', '/Users/mkulinski/Documents/Projects/buoy/client/components/BuoyList.js');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/BuoyList.js');
 	}();
 
 	;

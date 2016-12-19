@@ -25,20 +25,24 @@ export default class App extends Component {
     const currBuoys = this.state.buoys.filter(item => item.props.id === id);
     const newFavorites = this.state.favorites.concat(currBuoys);
     this.setState({ favorites: newFavorites });
+    console.log('state updated', this.state.favorites);
   }
 
   descParse(desc) {
     return Object.keys(desc).map((item) => {
       return [item, desc[item]];
     });
-    //this.state.buoys
   }
 
   render() {
     return (
       <div>
         <Nav />
-        { React.cloneElement(this.props.children, this.props) }
+        { React.cloneElement(this.props.children, this.props, {
+          appState: this.state,
+          onFav: this.onFav
+        })
+        }
       </div>
     );
   }
