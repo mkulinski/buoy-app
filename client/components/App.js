@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Nav from './Nav';
+import Buoy from './Buoy';
 
 export default class App extends Component {
   constructor() {
@@ -37,7 +38,7 @@ export default class App extends Component {
     return (
       <div>
         <Nav />
-        { this.state.buoys }
+        { React.cloneElement(this.props.children, this.props) }
       </div>
     );
   }
