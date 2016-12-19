@@ -1,13 +1,12 @@
 const express = require('express');
 const http = require('http');
-const X2JS = require('x2js');
 
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
 const buoyController = require('./controllers/buoyController');
-// const userController = require('./controllers/userController');
+const grabDataController = require('./controllers/grabDataController');
 
 const mongoURI = 'mongodb://localhost:27017/buoy';
 mongoose.connect(mongoURI);
@@ -23,43 +22,7 @@ const options = {
   method: 'GET',
 };
 
-function grabBuoyData(response) {
-  let str = '';
-  response.on('data', (chunk) => {
-    str += chunk;
-  });
-
-  response.on('end', () => {
-    // Converting XML to JS
-    const x2js = new X2JS();
-    const document = x2js.xml2js(str);
-    const doc = document.rss.channel.item;
-    // Removing all html tags from the strings in the description
-    doc.forEach((item) => {
-      const { description, title } = item;
-      // removes uneeded space and characters
-      let trimDesc = description.replace(/\/|br|<|>|\n|:/ig, '');
-      trimDesc = trimDesc.split('strong').map(strng => strng.trim());
-      // grabs date
-      const currDate = trimDesc.splice(0, 3).filter(date => date !== '')[0];
-      // create an object for description key/value pairs
-      const descObj = {};
-      for (let i = 0; i < trimDesc.length; i += 1) {
-        if (i % 2 === 0) {
-          descObj[trimDesc[i]];
-        } else {
-          descObj[trimDesc[i - 1]] = trimDesc[i];
-        }
-      }
-      // create an buoy object to store in database
-      const buoy = Object.assign({ title, date: currDate, description: descObj });
-      // stores buoy in database
-      buoyController.findOne(buoy);
-    });
-  });
-}
-
-const requesting = http.request(options, grabBuoyData);
+const requesting = http.request(options, grabDataController.grabData);
 requesting.end();
 
 // get request to send all buoy data to frontend
