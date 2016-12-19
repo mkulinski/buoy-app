@@ -28030,6 +28030,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(179);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Nav = function Nav() {
@@ -28042,12 +28044,20 @@
 	      _react2.default.createElement(
 	        'li',
 	        null,
-	        'Buoys'
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/buoys-list' },
+	          'Buoys'
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'li',
 	        null,
-	        'Favorites'
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/favorites' },
+	          'Favorites'
+	        )
 	      )
 	    )
 	  );
