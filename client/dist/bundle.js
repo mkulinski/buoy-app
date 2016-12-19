@@ -26434,8 +26434,9 @@
 
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
-	    _this.state = { buoys: [] };
+	    _this.state = { buoys: [], favorites: [] };
 	    _this.descParse = _this.descParse.bind(_this);
+	    _this.onFav = _this.onFav.bind(_this);
 	    return _this;
 	  }
 
@@ -26447,24 +26448,27 @@
 	      _axios2.default.get('/allBuoys').then(function (data) {
 	        var arr = data.data.map(function (item) {
 	          var desc = _this2.descParse(item.description);
-	          return _react2.default.createElement(_Buoy2.default, { title: item.title, date: item.date, desc: desc });
+	          return _react2.default.createElement(_Buoy2.default, { id: item._id, title: item.title, date: item.date, desc: desc, fav: _this2.onFav });
 	        });
 	        _this2.setState({ buoys: arr });
 	      });
 	    }
 	  }, {
+	    key: 'onFav',
+	    value: function onFav(e, id) {
+	      e.preventDefault();
+	      var currBuoys = this.state.buoys.filter(function (item) {
+	        return item.props.id === id;
+	      });
+	      var newFavorites = this.state.favorites.concat(currBuoys);
+	      this.setState({ favorites: newFavorites });
+	    }
+	  }, {
 	    key: 'descParse',
 	    value: function descParse(desc) {
-	      var outDesc = Object.keys(desc).map(function (item) {
-	        return _react2.default.createElement(
-	          'p',
-	          null,
-	          item,
-	          ': ',
-	          desc[item]
-	        );
+	      return Object.keys(desc).map(function (item) {
+	        return [item, desc[item]];
 	      });
-	      return outDesc;
 	    }
 	  }, {
 	    key: 'render',
@@ -28007,13 +28011,20 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Buoy = function Buoy(props) {
-	  console.log(props.desc);
 	  return _react2.default.createElement(
 	    'div',
-	    null,
+	    { style: { 'border': '1px, solid, black', 'backgroundColor': 'blue' } },
 	    _react2.default.createElement(
 	      'h4',
 	      null,
+	      _react2.default.createElement(
+	        'span',
+	        { onClick: function onClick(e) {
+	            return props.fav(e, props.id);
+	          } },
+	        '\u2606 '
+	      ),
+	      ' ',
 	      props.title
 	    ),
 	    _react2.default.createElement(
@@ -28021,7 +28032,15 @@
 	      null,
 	      props.date
 	    ),
-	    props.desc
+	    props.desc.map(function (item) {
+	      return _react2.default.createElement(
+	        'p',
+	        null,
+	        item[0],
+	        ': ',
+	        item[1]
+	      );
+	    })
 	  );
 	};
 

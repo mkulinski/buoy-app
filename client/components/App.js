@@ -5,24 +5,31 @@ import Buoy from './Buoy';
 export default class App extends Component {
   constructor() {
     super();
-    this.state = { buoys: [] };
+    this.state = { buoys: [], favorites: [] };
     this.descParse = this.descParse.bind(this);
+    this.onFav = this.onFav.bind(this);
   }
   componentDidMount() {
     axios.get('/allBuoys')
     .then((data) => {
       const arr = data.data.map((item) => {
         const desc = this.descParse(item.description);
-        return <Buoy title={item.title} date={item.date} desc={desc} />
+        return <Buoy id={item._id} title={item.title} date={item.date} desc={desc} fav={this.onFav} />
       });
       this.setState({ buoys: arr });
     });
   }
+  onFav(e, id) {
+    e.preventDefault();
+    const currBuoys = this.state.buoys.filter(item => item.props.id === id);
+    const newFavorites = this.state.favorites.concat(currBuoys);
+    this.setState({ favorites: newFavorites });
+  }
+
   descParse(desc) {
-    const outDesc = Object.keys(desc).map((item) => {
-      return <p>{item}: {desc[item]}</p>
+    return Object.keys(desc).map((item) => {
+      return [item, desc[item]];
     });
-    return outDesc;
   }
 
   render() {
