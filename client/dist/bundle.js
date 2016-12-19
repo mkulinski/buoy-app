@@ -28089,12 +28089,16 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _styles = __webpack_require__(266);
+
+	var _styles2 = _interopRequireDefault(_styles);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Buoy = function Buoy(props) {
 	  return _react2.default.createElement(
 	    'div',
-	    { style: { 'border': '1px, solid, black', 'backgroundColor': 'blue' } },
+	    { style: _styles2.default.buoyBorder },
 	    _react2.default.createElement(
 	      'h4',
 	      null,
@@ -28155,17 +28159,26 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Buoy = __webpack_require__(261);
+	var _styles = __webpack_require__(266);
 
-	var _Buoy2 = _interopRequireDefault(_Buoy);
+	var _styles2 = _interopRequireDefault(_styles);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var BuoyList = function BuoyList(props) {
 	  return _react2.default.createElement(
 	    'div',
-	    null,
-	    props.children.appState.buoys
+	    { style: _styles2.default.topContainer },
+	    _react2.default.createElement(
+	      'div',
+	      { style: _styles2.default.container },
+	      _react2.default.createElement(
+	        'h1',
+	        { style: _styles2.default.heading },
+	        'Buoys'
+	      ),
+	      props.children.appState.buoys
+	    )
 	  );
 	};
 
@@ -28203,9 +28216,9 @@
 
 	var _reactRouter = __webpack_require__(179);
 
-	var _loginStyles = __webpack_require__(264);
+	var _styles = __webpack_require__(266);
 
-	var _loginStyles2 = _interopRequireDefault(_loginStyles);
+	var _styles2 = _interopRequireDefault(_styles);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28218,10 +28231,10 @@
 	var Login = function (_Component) {
 	  _inherits(Login, _Component);
 
-	  function Login(props) {
+	  function Login() {
 	    _classCallCheck(this, Login);
 
-	    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this));
 
 	    _this.onSubmit = _this.onSubmit.bind(_this);
 	    return _this;
@@ -28243,27 +28256,27 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { style: _loginStyles2.default.topContainer },
+	        { style: _styles2.default.topContainer },
 	        _react2.default.createElement(
 	          'div',
-	          { style: _loginStyles2.default.container },
+	          { style: _styles2.default.container },
 	          _react2.default.createElement(
 	            'h1',
-	            { style: _loginStyles2.default.heading },
+	            { style: _styles2.default.heading },
 	            'Login'
 	          ),
 	          _react2.default.createElement(
 	            'form',
-	            { onSubmit: this.onSubmit, style: _loginStyles2.default.form },
+	            { onSubmit: this.onSubmit, style: _styles2.default.form },
 	            _react2.default.createElement(
 	              'label',
-	              { style: _loginStyles2.default.label },
+	              { style: _styles2.default.label },
 	              'Username'
 	            ),
-	            _react2.default.createElement('input', { type: 'text', ref: 'username', style: _loginStyles2.default.input }),
+	            _react2.default.createElement('input', { type: 'text', ref: 'username', style: _styles2.default.input }),
 	            _react2.default.createElement(
 	              'button',
-	              { type: 'submit', className: 'submit-button', style: _loginStyles2.default.buttonStyle },
+	              { type: 'submit', className: 'submit-button', style: _styles2.default.buttonStyle },
 	              'Submit'
 	            )
 	          )
@@ -28292,7 +28305,48 @@
 	;
 
 /***/ },
-/* 264 */
+/* 264 */,
+/* 265 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Favorites = function Favorites(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    props.children.appState.favorites
+	  );
+	};
+
+	var _default = Favorites;
+	exports.default = _default;
+	;
+
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Favorites, 'Favorites', '/Users/mkulinski/Documents/Projects/buoy/client/components/Favorites.js');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/Favorites.js');
+	}();
+
+	;
+
+/***/ },
+/* 266 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28348,6 +28402,10 @@
 	  },
 	  label: {
 	    marginBottom: 5
+	  },
+	  buoyBorder: {
+	    border: '1px solid #dddddd',
+	    textAlign: 'center'
 	  }
 	};
 
@@ -28359,47 +28417,7 @@
 	    return;
 	  }
 
-	  __REACT_HOT_LOADER__.register(style, 'style', '/Users/mkulinski/Documents/Projects/buoy/client/styles/loginStyles.js');
-	}();
-
-	;
-
-/***/ },
-/* 265 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Favorites = function Favorites(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    props.children.appState.favorites
-	  );
-	};
-
-	var _default = Favorites;
-	exports.default = _default;
-	;
-
-	var _temp = function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Favorites, 'Favorites', '/Users/mkulinski/Documents/Projects/buoy/client/components/Favorites.js');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/Favorites.js');
+	  __REACT_HOT_LOADER__.register(style, 'style', '/Users/mkulinski/Documents/Projects/buoy/client/styles/styles.js');
 	}();
 
 	;

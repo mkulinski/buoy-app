@@ -1,10 +1,13 @@
 import React from 'react';
-import Buoy from './Buoy';
+import style from '../styles/styles';
 
 const BuoyList = (props) => {
   return (
-    <div>
-      { props.children.appState.buoys }
+    <div style={style.topContainer}>
+      <div style={style.container}>
+        <h1 style={style.heading}>Buoys</h1>
+        { props.children.appState.buoys }
+      </div>
     </div>
   );
 };

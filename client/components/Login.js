@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import style from '../styles/loginStyles';
+import style from '../styles/styles';
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onSubmit = this.onSubmit.bind(this);
   }
 

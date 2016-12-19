@@ -50,6 +50,10 @@ const style = {
   label: {
     marginBottom: 5,
   },
+  buoyBorder: {
+    border: '1px solid #dddddd',
+    textAlign: 'center',
+  },
 };
 
 module.exports = style;
