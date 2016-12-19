@@ -65,7 +65,7 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _BuoyList = __webpack_require__(266);
+	var _BuoyList = __webpack_require__(262);
 
 	var _BuoyList2 = _interopRequireDefault(_BuoyList);
 
@@ -26484,7 +26484,6 @@
 	      });
 	      var newFavorites = this.state.favorites.concat(currBuoys);
 	      this.setState({ favorites: newFavorites });
-	      console.log('state updated', this.state.favorites);
 	    }
 	  }, {
 	    key: 'descParse',
@@ -26500,10 +26499,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Nav2.default, null),
-	        _react2.default.cloneElement(this.props.children, this.props, {
-	          appState: this.state,
-	          onFav: this.onFav
-	        })
+	        _react2.default.cloneElement(this.props.children, this.props, { appState: this.state, onFav: this.onFav })
 	      );
 	    }
 	  }]);
@@ -28146,7 +28142,50 @@
 	;
 
 /***/ },
-/* 262 */,
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Buoy = __webpack_require__(261);
+
+	var _Buoy2 = _interopRequireDefault(_Buoy);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var BuoyList = function BuoyList(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    props.children.appState.buoys
+	  );
+	};
+
+	var _default = BuoyList;
+	exports.default = _default;
+	;
+
+	var _temp = function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(BuoyList, 'BuoyList', '/Users/mkulinski/Documents/Projects/buoy/client/components/BuoyList.js');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/BuoyList.js');
+	}();
+
+	;
+
+/***/ },
 /* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28192,9 +28231,9 @@
 	    key: 'onSubmit',
 	    value: function onSubmit(evt) {
 	      evt.preventDefault();
-	      // grab username and password from form
+	      // grab username from form
 	      var username = this.refs.username.value;
-	      // go to dashboard
+	      // go to buoy-list
 	      if (username) _reactRouter.browserHistory.push('/buoy-list');
 	      // reset form
 	      this.refs.username.value = '';
@@ -28361,50 +28400,6 @@
 	  __REACT_HOT_LOADER__.register(Favorites, 'Favorites', '/Users/mkulinski/Documents/Projects/buoy/client/components/Favorites.js');
 
 	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/Favorites.js');
-	}();
-
-	;
-
-/***/ },
-/* 266 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Buoy = __webpack_require__(261);
-
-	var _Buoy2 = _interopRequireDefault(_Buoy);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var BuoyList = function BuoyList(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    props.children.appState.buoys
-	  );
-	};
-
-	var _default = BuoyList;
-	exports.default = _default;
-	;
-
-	var _temp = function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(BuoyList, 'BuoyList', '/Users/mkulinski/Documents/Projects/buoy/client/components/BuoyList.js');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mkulinski/Documents/Projects/buoy/client/components/BuoyList.js');
 	}();
 
 	;

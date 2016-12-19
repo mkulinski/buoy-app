@@ -54,7 +54,7 @@ function grabBuoyData(response) {
       // create an buoy object to store in database
       const buoy = Object.assign({ title, date: currDate, description: descObj });
       // stores buoy in database
-      buoyController.addBuoy(buoy);
+      buoyController.findOne(buoy);
     });
   });
 }
