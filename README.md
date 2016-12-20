@@ -1,5 +1,10 @@
 # buoy-app
 
+#### Stack
+* React
+* Node/Express
+* MongoDB
+
 #### To Start
 
 * After you clone the repo run `npm install` to install all dependencies
