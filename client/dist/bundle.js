@@ -26470,9 +26470,9 @@
 	      var _this2 = this;
 
 	      _axios2.default.get('/allBuoys').then(function (data) {
-	        var arr = data.data.map(function (item) {
+	        var arr = data.data.map(function (item, index) {
 	          var desc = _this2.descParse(item.description);
-	          return _react2.default.createElement(_Buoy2.default, { id: item._id, title: item.title, date: item.date, desc: desc, fav: _this2.onFav });
+	          return _react2.default.createElement(_Buoy2.default, { id: item._id, title: item.title, date: item.date, desc: desc, fav: _this2.onFav, key: index });
 	        });
 	        _this2.setState({ buoys: arr });
 	      });
@@ -28245,6 +28245,8 @@
 	    _this.onSubmit = _this.onSubmit.bind(_this);
 	    return _this;
 	  }
+	  // function triggered when user hits submit
+
 
 	  _createClass(Login, [{
 	    key: 'onSubmit',

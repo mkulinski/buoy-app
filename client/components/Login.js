@@ -7,7 +7,7 @@ export default class Login extends Component {
     super();
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+  // function triggered when user hits submit
   onSubmit(evt) {
     evt.preventDefault();
     // grab username from form

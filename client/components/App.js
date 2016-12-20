@@ -14,9 +14,9 @@ export default class App extends Component {
   componentDidMount() {
     axios.get('/allBuoys')
     .then((data) => {
-      const arr = data.data.map((item) => {
+      const arr = data.data.map((item, index) => {
         const desc = this.descParse(item.description);
-        return <Buoy id={item._id} title={item.title} date={item.date} desc={desc} fav={this.onFav} />
+        return <Buoy id={item._id} title={item.title} date={item.date} desc={desc} fav={this.onFav} key={index} />
       });
       this.setState({ buoys: arr });
     });
