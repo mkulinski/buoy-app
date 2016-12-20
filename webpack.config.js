@@ -8,8 +8,6 @@ const PATHS = {
 
 module.exports = {
   entry: [
-    // 'webpack-dev-server/client?http://localhost:8080', //required for react-hot-loader
-    // 'webpack/hot/only-dev-server',
     './client/index.js'
   ],
   output: {
@@ -23,16 +21,9 @@ module.exports = {
   		loaders: ['babel-loader']
   	}],
   },
-  watch: true, //what does watch do?
-  devTool: 'source-map', //what does devTool sourcemap do?
-  // devServer: {
-  // 	contentBase: PATHS.dist,
-  // },
+  watch: true,
+  devTool: 'source-map',
   resolve: {
   	extensions: ['', '.js', '.jsx'],
   }
-  // ,
-  // plugins: [
-  //   new webpack.HotModuleReplacementPlugin()
-  // ]
 }

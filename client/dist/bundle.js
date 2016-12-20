@@ -26461,6 +26461,8 @@
 	    _this.onFav = _this.onFav.bind(_this);
 	    return _this;
 	  }
+	  // grab all buoys from database
+
 
 	  _createClass(App, [{
 	    key: 'componentDidMount',
@@ -26475,6 +26477,8 @@
 	        _this2.setState({ buoys: arr });
 	      });
 	    }
+	    // adds the favorited buoys to the favorites state array
+
 	  }, {
 	    key: 'onFav',
 	    value: function onFav(e, id) {
@@ -26485,6 +26489,8 @@
 	      var newFavorites = this.state.favorites.concat(currBuoys);
 	      this.setState({ favorites: newFavorites });
 	    }
+	    // helper function to create array of arrays with key/value pairs of description data
+
 	  }, {
 	    key: 'descParse',
 	    value: function descParse(desc) {
@@ -28032,8 +28038,8 @@
 
 	var Nav = function Nav() {
 	  return _react2.default.createElement(
-	    'div',
-	    null,
+	    'nav',
+	    { className: 'nav' },
 	    _react2.default.createElement(
 	      'ul',
 	      null,
@@ -28106,7 +28112,7 @@
 	        'span',
 	        { onClick: function onClick(e) {
 	            return props.fav(e, props.id);
-	          } },
+	          }, className: 'star' },
 	        '\u2606 '
 	      ),
 	      ' ',

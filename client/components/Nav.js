@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Nav = () => (
-  <div>
+  <nav className="nav">
     <ul>
       <li><Link to="/buoy-list">Buoys</Link></li>
       <li><Link to="/favorites">Favorites</Link></li>
     </ul>
-  </div>
+  </nav>
 );
 
 

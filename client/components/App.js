@@ -10,6 +10,7 @@ export default class App extends Component {
     this.descParse = this.descParse.bind(this);
     this.onFav = this.onFav.bind(this);
   }
+  // grab all buoys from database
   componentDidMount() {
     axios.get('/allBuoys')
     .then((data) => {
@@ -20,13 +21,14 @@ export default class App extends Component {
       this.setState({ buoys: arr });
     });
   }
+  // adds the favorited buoys to the favorites state array
   onFav(e, id) {
     e.preventDefault();
     const currBuoys = this.state.buoys.filter(item => item.props.id === id);
     const newFavorites = this.state.favorites.concat(currBuoys);
     this.setState({ favorites: newFavorites });
   }
-
+  // helper function to create array of arrays with key/value pairs of description data
   descParse(desc) {
     return Object.keys(desc).map((item) => {
       return [item, desc[item]];
